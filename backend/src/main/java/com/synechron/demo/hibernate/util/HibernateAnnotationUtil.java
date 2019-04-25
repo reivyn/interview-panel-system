@@ -5,7 +5,10 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import com.fasterxml.classmate.AnnotationConfiguration;
+import com.synechron.demo.model.Panel;
+import com.synechron.demo.model.Role;
+import com.synechron.demo.model.Skill;
+import com.synechron.demo.model.User;
 
 /**
  * @author Rodolfo.Quiroz 
@@ -15,13 +18,17 @@ import com.fasterxml.classmate.AnnotationConfiguration;
 
 public class HibernateAnnotationUtil {
 	
-	private static SessionFactory sessionFactory;
+//	private static SessionFactory sessionFactory;
+	private static SessionFactory sessionFactory = buildSessionFactory();
 	
 	private static SessionFactory buildSessionFactory() {
 		try {
-			// Create the SessionFactory from hibernate-annotation.cfg.xml
+			// Create the SessionFactory from hibernate.cfg.xml
         	Configuration configuration = new Configuration();
-
+        	configuration.addAnnotatedClass(User.class);
+        	configuration.addAnnotatedClass(Panel.class);
+        	configuration.addAnnotatedClass(Role.class);
+        	configuration.addAnnotatedClass(Skill.class);
         	configuration.configure("hibernate.cfg.xml");
         	System.out.println("Hibernate Annotation Configuration loaded");
         	

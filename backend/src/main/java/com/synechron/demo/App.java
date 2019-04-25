@@ -1,11 +1,9 @@
 package com.synechron.demo;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-
 import com.synechron.demo.hibernate.util.HibernateAnnotationUtil;
 import com.synechron.demo.model.Role;
 import com.synechron.demo.model.User;
@@ -13,43 +11,49 @@ import com.synechron.demo.model.User;
 public class App {
 	public static void main( String[] args )
     {
-		User us2 = new User(7, "userPanel5", "123457", 1);
-    	User us3 = new User(7, "userPanelhgjgh6", "123459", 1 );
-    	System.out.println(us3.getUsername());
-    	System.out.println(us3.getRoles());
+		Session session = HibernateAnnotationUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		
+		
+		//Add User
+		User us1 = new User();
+		us1.setId(8);
+		us1.setActive(1);
+		us1.setPassword("123");
+		us1.setUsername("userTestHibernate");
+		
+		User us2 = new User();
+		us2.setId(88);
+		us2.setActive(1);
+		us2.setPassword("123");
+		us2.setUsername("twoTestHibernate");
+		
+		Set<User> setUser = new HashSet<User>();
+		setUser.add(us1);
+		setUser.add(us2);
+		
+		//Add Role		
+		Role rol1 = new Role();
+//		rol1.setId(9);
+		rol1.setName("RoleHibernate");
+		
+		Role rol2 = new Role();
+//		rol2.setId(99);	
+		rol2.setName("RoleTwoHibernate");
+		
+		Set <Role> roles = new HashSet<Role>();
+		roles.add(rol1);
+		roles.add(rol2);
 		
 		
 		
-		User us1 = new User(6, "userPanel4", "123456", 1);
-		User us23 = new User(7, "userPanel5", "123457", 1);
-		
-		Role r1 = new Role(3,"RolePanel", 1);
-		Role r2 = new Role(3,"RolePanel", 1);
-		Role r3 = new Role(3,"Recruiter", 1);
-		System.out.println(us1.getRoles());
-		us1.getRoles().add(r1);
-		us1.getRoles().add(r2);
-		us2.getRoles().add(r3);
-		
+		rol1.setUsers(setUser);
+		rol2.setUsers(setUser);
 
-		r1.getUsers().add(us1);
-		r2.getUsers().add(us1);
-		r3.getUsers().add(us2);
+		session.save(rol1);
+		session.save(rol2);
 		
-		SessionFactory sessionFactory = null;
-		Session session = null;
-		Transaction tx = null;
+		session.getTransaction().commit();
 		
-		sessionFactory = HibernateAnnotationUtil.getSessionFactory();
-		session = sessionFactory.getCurrentSession();
-		System.out.println("Session created");
-		//start transaction
-		tx = session.beginTransaction();
-		//Save the Model object
-		session.save(us1);
-		session.save(us2);
-		//Commit transaction
-		tx.commit();
-    	
     }
 }

@@ -1,11 +1,15 @@
 package com.synechron.demo.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
@@ -56,8 +60,13 @@ public class Panel {
 	@Column(name = "slots")
 	private String slots;
 	
-	@OneToMany(mappedBy="panel")
-	private Set<Skill> skills;
+	@ManyToMany(cascade= {CascadeType.ALL})
+	@JoinTable(name="panel_skill", joinColumns={@JoinColumn(referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(referencedColumnName="id")})
+	private Set<Skill> skills = new HashSet<Skill>();
+	
+//	@ManyToMany(cascade= {CascadeType.ALL})
+//	@JoinTable(name="panel_skill", joinColumns={@JoinColumn(name="id")}, inverseJoinColumns={@JoinColumn(name="id")})
+//	private Set<Skill> skills = new HashSet<>();
 
 	public Panel() {
 	}

@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.ColumnDefault;
 
@@ -22,19 +23,19 @@ import org.hibernate.annotations.ColumnDefault;
  * version 1.0
  */
 
-@Entity
-@Table(name="user")
+@Entity(name="UserEntity")
+@Table(name="user",uniqueConstraints= @UniqueConstraint(columnNames="id"))
 public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
+	@Column(name = "id",unique=true, nullable=false)
+	private Integer id;
 	
-	@Column(name = "username")
+	@Column(name = "username", unique = false, nullable = false, length = 20)
 	private String username;
 	
-	@Column(name = "password")
+	@Column(name = "password", unique = false, nullable = false, length = 20)
 	private String password;
 	
 	@Column(name = "active")
@@ -42,8 +43,12 @@ public class User {
 	private int active;
 	
 	@ManyToMany(cascade= {CascadeType.ALL})
-	@JoinTable(name="user_role",joinColumns={@JoinColumn(name="user_id")},inverseJoinColumns={@JoinColumn(name="role_id")})
-	private Set<Role> roles= new HashSet();
+	@JoinTable(name="user_role", joinColumns={@JoinColumn(referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(referencedColumnName="id")})
+	private Set<Role> roles= new HashSet<Role>();
+	
+//	@ManyToMany(cascade= {CascadeType.ALL})
+//	@JoinTable(name="user_role", joinColumns={@JoinColumn(name="id")}, inverseJoinColumns={@JoinColumn(name="id")})
+//	private Set<Role> roles= new HashSet<>();
 
 	public User() {
 
