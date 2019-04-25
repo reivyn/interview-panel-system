@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-    	<property name="hibernate.archive.autodetection">class,hbm</property>
+    	<property name="hibernate.archive.autodetection">class</property>
     	<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     	<property name="hibernate.show_sql">true</property>
     	<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
@@ -17,10 +17,10 @@
 	    <property name="connection.pool_size">1</property>
 	    <property name="current_session_context_class">thread</property>
 	    
-	    
-	    <mapping resource="com.synechron.demo.model.user"/>
-	    <mapping resource="com.synechron.demo.model.panel"/>
-	    <mapping resource="com.synechron.demo.model.skill"/>
-	    <mapping resource="com.synechron.demo.model.role"/>
+	    <mapping class="com.synechron.demo.model.User"/>
+	    <mapping class="com.synechron.demo.model.Role"/>
+	    <mapping class="com.synechron.demo.model.Panel"/>
+	    <mapping class="com.synechron.demo.model.Skill"/>
+
     </session-factory>
 </hibernate-configuration>

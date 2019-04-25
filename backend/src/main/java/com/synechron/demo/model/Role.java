@@ -6,9 +6,13 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
 import com.synechron.demo.model.User;
 
 /**
@@ -17,22 +21,23 @@ import com.synechron.demo.model.User;
  * version 1.0
  */
 
-@Entity
-@Table(name = "role")
+@Entity(name="roleEntity")
+@Table(name = "role", uniqueConstraints = {@UniqueConstraint(columnNames ="id")})
 public class Role {
 	
 	@Id
-	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
 	private int id;
 	
-	@Column(name = "name")
+	@Column(name = "name", nullable = false, length = 20)
 	private String name;
-	
-	@Column(name = "active")
-	private int active;
 
-	@ManyToMany(cascade = {CascadeType.ALL},mappedBy="roles")
-	private Set<User> users= new HashSet();
+	@ManyToMany(cascade = {CascadeType.ALL}, mappedBy="roles")
+	private Set<User> users= new HashSet<User>();
+	
+//	@ManyToMany(mappedBy="roles")
+//	private Set<User> users= new HashSet<>();
 
 	public Role() {
 	}
@@ -40,7 +45,6 @@ public class Role {
 	public Role(int id, String name, int active) {
 		this.id = id;
 		this.name = name;
-		this.active = active;
 		
 	}
 
@@ -58,14 +62,6 @@ public class Role {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public int getActive() {
-		return active;
-	}
-
-	public void setActive(int active) {
-		this.active = active;
 	}
 
 	public Set<User> getUsers() {

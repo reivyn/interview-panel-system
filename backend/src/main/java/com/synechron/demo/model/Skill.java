@@ -1,10 +1,13 @@
 package com.synechron.demo.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,15 +21,17 @@ import javax.persistence.Table;
 public class Skill {
 	
 	@Id
-	@Column(name = "id")
-	private int id;
+	@Column(name = "id", nullable=false)
+	private Integer id;
 	
 	@Column(name = "name")
 	private String name;
 	
-	@ManyToOne
-    @JoinColumn(name="id", nullable=false)
-	private Panel panel;
+	@ManyToMany(cascade = {CascadeType.ALL},mappedBy="skills")
+	private Set <Panel> panels= new HashSet<Panel>();
+	
+//	@ManyToMany(mappedBy="skills")
+//	private Set <Panel> panels= new HashSet<Panel>();
 
 	public Skill() {
 	}
@@ -36,11 +41,11 @@ public class Skill {
 		this.name = name;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -52,12 +57,12 @@ public class Skill {
 		this.name = name;
 	}
 
-	public Panel getPanel() {
-		return panel;
+	public Set<Panel> getPanels() {
+		return panels;
 	}
 
-	public void setPanel(Panel panel) {
-		this.panel = panel;
-	}
+	public void setPanels(Set<Panel> panels) {
+		this.panels = panels;
+	}	
 	
 }
