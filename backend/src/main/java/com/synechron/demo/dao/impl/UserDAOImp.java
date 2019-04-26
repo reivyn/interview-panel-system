@@ -2,7 +2,9 @@ package com.synechron.demo.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.synechron.demo.dao.UserDAO;
@@ -12,6 +14,10 @@ public class UserDAOImp implements UserDAO {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	public void setSessionFactory(SessionFactory sessionFactory) {
+	    this.sessionFactory = sessionFactory;
+	}
 
 	@Override
 	public void add(User user) {
@@ -21,7 +27,11 @@ public class UserDAOImp implements UserDAO {
 	
 	@Override
 	public void saveUser(User user) {
-		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		session.persist(user);
+		tx.commit();
+		session.close();
 		
 	}
 
@@ -37,14 +47,13 @@ public class UserDAOImp implements UserDAO {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = this.sessionFactory.openSession();
+		List<User> users = session.createQuery("from user").list();
+		session.close();
+		return users;
 	}
-
-	
-	
-	
 
 }

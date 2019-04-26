@@ -15,7 +15,8 @@ import com.synechron.demo.model.Panel;
 
 public interface PanelDAO {
 	
-	void insertPanel(Panel panel);
+	void addPanel(Panel panel);
+	void savePanel(Panel panel);
 	Panel getPanelById(int panelId);
 	Panel getPanel(String name);
 	List<Panel> getPanel();

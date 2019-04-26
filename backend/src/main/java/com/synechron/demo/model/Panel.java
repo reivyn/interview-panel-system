@@ -1,16 +1,19 @@
 package com.synechron.demo.model;
 
-import java.util.HashSet;
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 
 /**
@@ -19,25 +22,28 @@ import javax.persistence.Table;
  * version 1.0
  */
 
-@Entity
-@Table(name = "panel")
-public class Panel {
+@Entity(name="panel")
+@Table(name = "panel",uniqueConstraints= @UniqueConstraint(columnNames="id"))
+public class Panel implements Serializable{
 	
+	private static final long serialVersionUID = 2046123816844029364L;
+
 	@Id
-	@Column(name = "id")
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id",unique=true, nullable=false)
+	private Integer idPanel;
 	
 	@Column(name = "user_id")
-	private int user_id;
+	private Integer userId;
 	
 	@Column(name = "id_syne", unique = true)
-	private int id_syne;
+	private Integer idSyne;
 	
 	@Column(name = "name")
-	private String name;
+	private String namePanel;
 	
 	@Column(name = "surname")
-	private String surname;
+	private String surnamePanel;
 	
 	@Column(name = "phone")
 	private String phone;
@@ -46,10 +52,10 @@ public class Panel {
 	private String extension;
 	
 	@Column(name = "email_syne")
-	private String email_syne;
+	private String emailSyne;
 	
 	@Column(name = "email_wf")
-	private String email_wf;
+	private String emailWf;
 	
 	@Column(name = "designation")
 	private String designation;
@@ -62,69 +68,66 @@ public class Panel {
 	
 	@ManyToMany(cascade= {CascadeType.ALL})
 	@JoinTable(name="panel_skill", joinColumns={@JoinColumn(referencedColumnName="id")}, inverseJoinColumns={@JoinColumn(referencedColumnName="id")})
-	private Set<Skill> skills = new HashSet<Skill>();
+	private Set<Skill> skill;
 	
-//	@ManyToMany(cascade= {CascadeType.ALL})
-//	@JoinTable(name="panel_skill", joinColumns={@JoinColumn(name="id")}, inverseJoinColumns={@JoinColumn(name="id")})
-//	private Set<Skill> skills = new HashSet<>();
 
 	public Panel() {
 	}
-	
-	public Panel(int id, int user_id, int id_syne, String name, String surname, String phone, String extension,
-			String email_syne, String email_wf, String designation, String level, String slots) {
-		this.id = id;
-		this.user_id = user_id;
-		this.id_syne = id_syne;
-		this.name = name;
-		this.surname = surname;
+
+	public Panel(Integer idPanel, Integer userId, Integer idSyne, String namePanel, String surnamePanel, String phone,
+			String extension, String emailSyne, String emailWf, String designation, String level, String slots) {
+		this.idPanel = idPanel;
+		this.userId = userId;
+		this.idSyne = idSyne;
+		this.namePanel = namePanel;
+		this.surnamePanel = surnamePanel;
 		this.phone = phone;
 		this.extension = extension;
-		this.email_syne = email_syne;
-		this.email_wf = email_wf;
+		this.emailSyne = emailSyne;
+		this.emailWf = emailWf;
 		this.designation = designation;
 		this.level = level;
 		this.slots = slots;
 	}
 
-	public int getId() {
-		return id;
+	public Integer getIdPanel() {
+		return idPanel;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdPanel(Integer idPanel) {
+		this.idPanel = idPanel;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
-	public int getId_syne() {
-		return id_syne;
+	public Integer getIdSyne() {
+		return idSyne;
 	}
 
-	public void setId_syne(int id_syne) {
-		this.id_syne = id_syne;
+	public void setIdSyne(Integer idSyne) {
+		this.idSyne = idSyne;
 	}
 
-	public String getName() {
-		return name;
+	public String getNamePanel() {
+		return namePanel;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNamePanel(String namePanel) {
+		this.namePanel = namePanel;
 	}
 
-	public String getSurname() {
-		return surname;
+	public String getSurnamePanel() {
+		return surnamePanel;
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setSurnamePanel(String surnamePanel) {
+		this.surnamePanel = surnamePanel;
 	}
 
 	public String getPhone() {
@@ -143,20 +146,20 @@ public class Panel {
 		this.extension = extension;
 	}
 
-	public String getEmail_syne() {
-		return email_syne;
+	public String getEmailSyne() {
+		return emailSyne;
 	}
 
-	public void setEmail_syne(String email_syne) {
-		this.email_syne = email_syne;
+	public void setEmailSyne(String emailSyne) {
+		this.emailSyne = emailSyne;
 	}
 
-	public String getEmail_wf() {
-		return email_wf;
+	public String getEmailWf() {
+		return emailWf;
 	}
 
-	public void setEmail_wf(String email_wf) {
-		this.email_wf = email_wf;
+	public void setEmailWf(String emailWf) {
+		this.emailWf = emailWf;
 	}
 
 	public String getDesignation() {
@@ -183,12 +186,20 @@ public class Panel {
 		this.slots = slots;
 	}
 
-	public Set<Skill> getSkills() {
-		return skills;
+	public Set<Skill> getSkill() {
+		return skill;
 	}
 
-	public void setSkills(Set<Skill> skills) {
-		this.skills = skills;
+	public void setSkill(Set<Skill> skill) {
+		this.skill = skill;
 	}
 
+	@Override
+	public String toString() {
+		return "Panel [idPanel=" + idPanel + ", userId=" + userId + ", idSyne=" + idSyne + ", namePanel=" + namePanel
+				+ ", surnamePanel=" + surnamePanel + ", phone=" + phone + ", extension=" + extension + ", emailSyne="
+				+ emailSyne + ", emailWf=" + emailWf + ", designation=" + designation + ", level=" + level + ", slots="
+				+ slots + "]";
+	}
+	
 }

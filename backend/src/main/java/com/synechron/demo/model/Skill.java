@@ -1,14 +1,16 @@
 package com.synechron.demo.model;
 
-import java.util.HashSet;
+import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * @author Rodolfo.Quiroz 
@@ -16,53 +18,58 @@ import javax.persistence.Table;
  * version 1.0
  */
 
-@Entity
-@Table(name = "skill")
-public class Skill {
+@Entity(name="skill")
+@Table(name = "skill", uniqueConstraints = {@UniqueConstraint(columnNames ="id")})
+public class Skill implements Serializable{
 	
+	private static final long serialVersionUID = 39733727501269211L;
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable=false)
-	private Integer id;
+	private Integer idSkill;
 	
 	@Column(name = "name")
-	private String name;
+	private String nameSkill;
 	
-	@ManyToMany(cascade = {CascadeType.ALL},mappedBy="skills")
-	private Set <Panel> panels= new HashSet<Panel>();
-	
-//	@ManyToMany(mappedBy="skills")
-//	private Set <Panel> panels= new HashSet<Panel>();
+	@ManyToMany(mappedBy="skill")
+	private Set <Panel> panel;
 
 	public Skill() {
 	}
-	
-	public Skill(int id, String name) {
-		this.id = id;
-		this.name = name;
+
+	public Skill(Integer idSkill, String nameSkill) {
+		this.idSkill = idSkill;
+		this.nameSkill = nameSkill;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getIdSkill() {
+		return idSkill;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdSkill(Integer idSkill) {
+		this.idSkill = idSkill;
 	}
 
-	public String getName() {
-		return name;
+	public String getNameSkill() {
+		return nameSkill;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNameSkill(String nameSkill) {
+		this.nameSkill = nameSkill;
 	}
 
-	public Set<Panel> getPanels() {
-		return panels;
+	public Set<Panel> getPanel() {
+		return panel;
 	}
 
-	public void setPanels(Set<Panel> panels) {
-		this.panels = panels;
-	}	
+	public void setPanel(Set<Panel> panel) {
+		this.panel = panel;
+	}
+
+	@Override
+	public String toString() {
+		return "Skill [idSkill=" + idSkill + ", nameSkill=" + nameSkill + "]";
+	}
 	
 }

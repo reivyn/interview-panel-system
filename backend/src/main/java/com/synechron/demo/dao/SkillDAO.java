@@ -12,7 +12,8 @@ import com.synechron.demo.model.Skill;
 
 public interface SkillDAO {
 	
-	void insertSkill(Skill skill);
+	void addSkill(Skill skill);
+	void saveSkill(Skill skill);
 	Skill getSkillById(int skillId);
 	Skill getSkill(String name);
 	List<Skill> getSkill();
