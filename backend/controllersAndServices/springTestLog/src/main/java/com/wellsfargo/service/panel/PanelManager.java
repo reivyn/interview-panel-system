@@ -1,7 +1,10 @@
 package com.wellsfargo.service.panel;
 
 
-// import panelModel
+import java.util.List;
+
+import com.wellsfargo.model.*;
+
 public interface PanelManager {
 
 // //panelDAO.getSlot(panelId, slotId);

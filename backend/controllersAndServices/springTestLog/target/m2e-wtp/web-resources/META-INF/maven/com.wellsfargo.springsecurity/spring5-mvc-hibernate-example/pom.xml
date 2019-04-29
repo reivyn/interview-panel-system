@@ -6,6 +6,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<properties>
+	
+  		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<spring-framework.version>4.0.3.RELEASE</spring-framework.version>
+ 
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 		<spring.version>5.0.0.RELEASE</spring.version>
 		<hibernate.version>5.2.11.Final</hibernate.version>
@@ -24,6 +31,58 @@
 	
 	<dependencies>
 
+<!--Spring -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context</artifactId>
+		<version>${spring-framework.version}</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-tx</artifactId>
+		<version>${spring-framework.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-orm</artifactId>
+		<version>${spring-framework.version}</version>
+	</dependency>
+	
+	 <dependency>
+		<groupId>org.hibernate.validator</groupId>
+		<artifactId>hibernate-validator-annotation-processor</artifactId>
+		<version>6.0.13.Final</version>
+	</dependency>
+	<!-- <dependency>
+         <groupId>org.hibernate</groupId>
+         <artifactId>hibernate-c3p0</artifactId>
+         <version>5.1.0.Final</version>
+     </dependency> -->
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-entitymanager</artifactId>
+	    <version>5.3.7.Final</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.hibernate.validator</groupId>
+		<artifactId>hibernate-validator</artifactId>
+		<version>6.0.13.Final</version>
+	</dependency>
+	
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- Mysql Connector -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.11</version>
+</dependency>
  
 <!-- Spring MVC Dependency -->
 <dependency>

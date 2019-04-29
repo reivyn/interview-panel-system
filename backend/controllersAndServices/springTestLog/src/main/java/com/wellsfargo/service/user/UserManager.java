@@ -1,6 +1,8 @@
 package com.wellsfargo.service.user;
 
+import java.util.List;
 
+import com.wellsfargo.model.*;
 //import User model
 public interface UserManager {
 	  void createUser(User user);

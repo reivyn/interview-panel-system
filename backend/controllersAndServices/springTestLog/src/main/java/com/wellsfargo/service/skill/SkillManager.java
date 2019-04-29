@@ -1,7 +1,9 @@
 package com.wellsfargo.service.skill;
 
-//import skillModel
+import java.util.List;
 
+//import skillModel
+import com.wellsfargo.model.*;
 public interface SkillManager {
 
 	  void createSkill(Skill skill);

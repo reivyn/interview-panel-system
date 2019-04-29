@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.wellsfargo.model.*;
 
 //import SKILL Model
+import com.wellsfargo.service.skill.SkillManager;
 
 @RestController
 public class SkillRestController {
@@ -26,14 +28,14 @@ public class SkillRestController {
 	
 	@GetMapping("/skills")
 	public ResponseEntity<List<Skill>> getSkills() {
-		List<Skills> skills = skillManager.getSkills();
+		List<Skill> skills = skillManager.getSkills();
 		return new ResponseEntity<>(skills, HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/skills/{skillId}")
 	public ResponseEntity getSkill(@PathVariable("skillId") int skillId) {
 
-		Skill skill = skillManager.get(skillId);
+		Skill skill = skillManager.getSkillById(skillId);
 		if (skill == null) {
 			return new ResponseEntity("No Skill found for ID " + skillId, HttpStatus.NOT_FOUND);
 		}
@@ -44,7 +46,7 @@ public class SkillRestController {
 	@PostMapping(value = "/skills")
 	public ResponseEntity createSkill(@RequestBody Skill skill) {
 
-		skillManager.create(skill);
+		skillManager.createSkill(skill);;
 
 		return new ResponseEntity(skill, HttpStatus.OK);
 	}
@@ -64,8 +66,8 @@ public class SkillRestController {
 	@PutMapping("/skills/{skillId}")
 	public ResponseEntity updateSkill(@PathVariable int skillId, @RequestBody Skill skill) {
 		
+		//skill = skillManager.updateSkill(skillId, skill);
 		skill = skillManager.updateSkill(skillId, skill);
-
 		if (null == skill) {
 			return new ResponseEntity("No Skill found for ID " + skillId, HttpStatus.NOT_FOUND);
 		}

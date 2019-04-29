@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wellsfargo.service.user.UserManager;
-import com.wellsfargo.service.user.impl.User;
-
+import com.wellsfargo.model.*;
  //import USER Model
 
 @RestController
@@ -40,7 +39,7 @@ public class UserRestController {
 	@GetMapping("/users/{userId}")
 	public ResponseEntity getUser(@PathVariable("userId") int userId) {
 
-		User user = userManager.get(userId);
+		User user = userManager.getUserById(userId);
 		if (user == null) {
 			return new ResponseEntity<>("No User found for ID " + userId, HttpStatus.NOT_FOUND);
 		}
@@ -51,7 +50,7 @@ public class UserRestController {
 	@PostMapping(value = "/users")
 	public ResponseEntity createUser(@RequestBody User user) {
 
-		userManager.create(user);
+		userManager.createUser(user);;
 
 		return new ResponseEntity(user, HttpStatus.OK);
 	}

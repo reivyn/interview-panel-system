@@ -1,5 +1,5 @@
 package com.wellsfargo.service.panel.impl;
-
+import com.wellsfargo.model.*;
 import com.wellsfargo.service.panel.PanelManager;
 
 import java.util.List;
@@ -10,18 +10,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 //import panelDAO
 //import panelModel
-
+import com.wellsfargo.dao.*;
 @Service
 public class PanelManagerImpl implements PanelManager {
 
 
-	  @Resource
+	
+	  @Autowired
 	  private PanelDAO panelDAO;
 	  
 	  @Override
 	  @Transactional
 	  public void createPanel(Panel panel) {
-	    panelDAO.insertPanel(panel);
+	    panelDAO.addPanel(panel);
 	  }
 	  
 	
@@ -47,7 +48,7 @@ public class PanelManagerImpl implements PanelManager {
 	  @Override
 	  @Transactional
 	  public List<Panel> getPanels() {
-	    return panelDAO.getPanels();
+	    return panelDAO.getPanel();
 	  }
 	
 	

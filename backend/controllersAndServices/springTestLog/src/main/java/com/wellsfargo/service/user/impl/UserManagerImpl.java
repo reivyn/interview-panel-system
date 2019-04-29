@@ -1,6 +1,6 @@
 package com.wellsfargo.service.user.impl;
-
-
+import com.wellsfargo.dao.*;
+import com.wellsfargo.model.*;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import com.wellsfargo.service.user.UserManager;
 @Service
 public class UserManagerImpl implements UserManager {
 
-	 @Resource
+		@Autowired
 	  private UserDAO userDAO;
 	
 	
@@ -22,7 +22,7 @@ public class UserManagerImpl implements UserManager {
 	  @Override
 	  @Transactional
 	  public void createUser(User user) {
-	    userDAO.insertUser(user);
+	    userDAO.add(user);;
 	  }
 	  
 	
@@ -42,7 +42,7 @@ public class UserManagerImpl implements UserManager {
 	  @Override
 	  @Transactional
 	  public User updateUser(int userId, User user) {
-		  return userDAO.updateUser(user);
+		  return userDAO.updateUser(userId ,user);
 	  }
 	  
 	  @Override

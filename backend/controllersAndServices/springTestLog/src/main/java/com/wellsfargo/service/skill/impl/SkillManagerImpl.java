@@ -1,24 +1,24 @@
 package com.wellsfargo.service.skill.impl;
-
+import com.wellsfargo.dao.*;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wellsfargo.service.skill.SkillManager;
-
-
+import com.wellsfargo.model.*;
+import com.wellsfargo.model.*;
 // import skill DAO 
 // import skill model
 public class SkillManagerImpl implements SkillManager {
 
-	  @Resource
+		@Autowired
 	  private SkillDAO skillDAO;
 	  
 	 @Override
 	  @Transactional
 	  public void createSkill(Skill skill) {
-	    skillDAO.insertSkill(skill);
+	    skillDAO.addSkill(skill);;
 	  }
 	  
 	
@@ -38,25 +38,33 @@ public class SkillManagerImpl implements SkillManager {
 	  @Override
 	  @Transactional
 	  public Skill updateSkill(int skillId, Skill skill) {
-		  return skillDAO.updateSkill(skill);
+		  return skillDAO.updateSkill;
 	  }
 	  
-	  
+	  /*
 	  @Override
 	  @Transactional
 	  public Skill deleteSkill(int skillId) {
 		   return skillDAO.deleteSkill(skillId);
 		  
 	  }
-	  
+	  */
 	  
 	  @Override
 	  @Transactional
 	  public List<Skill> getSkills() {
 		  //  final List<Skill> list = skillDAO.find(Skill.class);
 		   // return list;
-	    return skillDAO.getSkills();
+	    return skillDAO.getSkill();
 	  }
+
+
+
+	@Override
+	public Skill deleteSkill(int skillId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
 

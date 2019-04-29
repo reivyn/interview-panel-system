@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.wellsfargo.service.panel.*;
+import com.wellsfargo.model.*;
 // import Panel manager
 // import slot bean
 
@@ -75,7 +76,7 @@ public class PanelRestController {
 	@PutMapping("/panels/{panelId}")
 	public ResponseEntity updatePanel(@PathVariable int panelId, @RequestBody Panel panel) {
 
-		panel = panelManager.update(panelId, panel);
+		panel = panelManager.updatePanel(panelId, panel);
 
 		if (null == panel) {
 			return new ResponseEntity("No Panel found for ID " + panelId, HttpStatus.NOT_FOUND);
