@@ -28,7 +28,7 @@ public class SkillManagerImpl implements SkillManager {
 	  public Skill getSkillById(int skillId) {
 	    return skillDAO.getSkillById(skillId);
 	  }
-	  
+	
 	  @Override
 	  @Transactional
 	  public Skill getSkill(String skillname) {
@@ -38,7 +38,9 @@ public class SkillManagerImpl implements SkillManager {
 	  @Override
 	  @Transactional
 	  public Skill updateSkill(int skillId, Skill skill) {
-		  return skillDAO.updateSkill;
+		  return null;
+					 //return userDAO.updateSkill(skillId ,skill);
+
 	  }
 	  
 	  /*

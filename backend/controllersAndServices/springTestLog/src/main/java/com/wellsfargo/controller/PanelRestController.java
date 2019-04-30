@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.wellsfargo.service.panel.*;
 import com.wellsfargo.model.*;
@@ -18,15 +19,18 @@ import com.wellsfargo.model.*;
 // import slot bean
 
 @RestController
-//@RequestMapping("/panels")
+@RequestMapping("/panels")
 public class PanelRestController {
 
 	
-	
-	
 	@Autowired
 	private PanelManager panelManager;
-
+	
+	
+	@GetMapping("/test")
+	public String test() {
+		return "HOLA";
+	}
 	
 	@GetMapping("/panels")	
 	public ResponseEntity<List<Panel>> getPanels() {

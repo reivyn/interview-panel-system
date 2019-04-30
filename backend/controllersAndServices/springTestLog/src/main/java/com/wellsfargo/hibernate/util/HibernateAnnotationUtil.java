@@ -1,6 +1,7 @@
 package com.wellsfargo.hibernate.util;
 
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -19,12 +20,24 @@ import com.wellsfargo.model.User;
 
 public class HibernateAnnotationUtil {
 	
+
 	private static SessionFactory sessionFactory;
 //	private static SessionFactory sessionFactory = buildSessionFactory();
 	
 	private static SessionFactory buildSessionFactory() {
 		try {
+			
+//			SessionFactory s = new Configuration().configure("hibernate.cfg.xml").
+//					addAnnotatedClass(User.class).
+//					addAnnotatedClass(Role.class).
+//					addAnnotatedClass(Panel.class).
+//					addAnnotatedClass(Skill.class).
+//					
+//					buildSessionFactory();
+			
+			System.out.println("UNOENTRA");
         	Configuration configuration = new Configuration();
+        	System.out.println("DOSENTRA");
         	configuration.addAnnotatedClass(User.class);
         	configuration.addAnnotatedClass(Role.class);
         	configuration.addAnnotatedClass(Panel.class);

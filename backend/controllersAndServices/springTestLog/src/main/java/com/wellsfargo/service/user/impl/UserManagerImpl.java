@@ -42,7 +42,8 @@ public class UserManagerImpl implements UserManager {
 	  @Override
 	  @Transactional
 	  public User updateUser(int userId, User user) {
-		  return userDAO.updateUser(userId ,user);
+		  return null;
+		// return userDAO.updateUser(userId ,user);
 	  }
 	  
 	  @Override

@@ -42,7 +42,8 @@ public class PanelManagerImpl implements PanelManager {
 	  @Override
 	  @Transactional
 	  public Panel updatePanel(int panelId, Panel panel) {
-		  return panelDAO.updatePanel(panel);
+		  	return null;
+		 // return panelDAO.updatePanel(panel);
 	  }
 	  
 	  @Override
