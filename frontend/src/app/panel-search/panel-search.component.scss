@@ -1,0 +1,46 @@
+.row-blocked {
+  background-color: #FFCDD2;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-90 {
+  width: 90%;
+}
+
+.font-s {
+  font-size: small;
+}
+
+div.container{
+  width: 100%;
+  position: absolute;
+  margin-top: 10%;
+  //margin: 10% 0 auto 2% ;
+  padding-right: 100px;
+  table {
+    width: 90%;
+    margin-left: 5%;
+    td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type, th.mat-header-cell:last-of-type {
+      padding-right: 0;
+    }
+  }
+
+  mat-paginator {
+    width: 90%;
+    margin-left: 5%;
+  }
+  mat-form-field {
+    width: 88.71%;
+    margin-left: 5%;
+
+  }
+}
+
+
+
+
+
+

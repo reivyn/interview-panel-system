@@ -1,0 +1,38 @@
+<div class="container">
+<!--  LOGIN-->
+<!--    <app-login [labelTitle]='login.label_title' [labelUser]="login.label_user" [labelPassword]="login.label_password">Login...</app-login>-->
+
+<!-- SHARED MENU -->
+  <mat-toolbar *ngIf="this.router.url.search('/login')">
+    <mat-toolbar-row>
+      <img src="../../assets/img/synechron-logo-dark.png" height="31" width="146"/>
+      <span class="example-spacer"></span>
+      <span>John Doe</span>
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">account_circle</mat-icon>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngIf="this.router.url.search('/panelSearch')"  routerLink="/panelSearch/">
+          <mat-icon>search</mat-icon>
+          <span>Panel Search</span>
+        </button>
+        <button mat-menu-item *ngIf="this.router.url.search('/panelEntry')" routerLink="/panelEntry/">
+          <mat-icon>edit</mat-icon>
+          <span>Panel Entry</span>
+        </button>
+        <button mat-menu-item routerLink="/login/">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Log Out</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+<!-- PANEL ENTRY, PANEL EDIT -->
+<!--  <app-panel-entry></app-panel-entry>-->
+
+<!--  PANEL SEARCH -->
+<!--  <app-panel-search></app-panel-search>-->
+  <router-outlet></router-outlet>
+</div>

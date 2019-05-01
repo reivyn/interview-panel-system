@@ -1,0 +1,22 @@
+.modal-container {
+  width: 300px;
+}
+
+.dialog-button-close {
+  float: right;
+}
+
+.mat-dialog-title {
+  text-align: center;
+  margin-left: 10%;
+}
+
+mat-dialog-content .mat-form-field {
+  width: 99%;
+}
+
+mat-dialog-actions {
+  margin-left: 45%;
+}
+
+/*# sourceMappingURL=user-sign-up.component.css.map */

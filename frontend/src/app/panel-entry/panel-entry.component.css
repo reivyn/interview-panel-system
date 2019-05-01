@@ -1,0 +1,46 @@
+mat-card {
+  width: 60%;
+  position: absolute;
+  margin-top: 10%;
+  margin-left: 20%;
+  padding-right: 80px;
+}
+mat-card mat-card-title {
+  text-align: center;
+}
+mat-card .form-column {
+  display: flex;
+  flex-direction: column;
+}
+mat-card .form-row {
+  display: flex;
+  flex-direction: row;
+  padding: 0 14px;
+}
+mat-card .form-row mat-form-field {
+  width: 100%;
+  padding-left: 14px;
+}
+mat-card .form-row mat-divider {
+  padding-left: 14px;
+}
+mat-card .form-row table {
+  width: 100%;
+}
+mat-card .form-row table td.mat-cell:last-of-type, mat-card .form-row table td.mat-footer-cell:last-of-type, mat-card .form-row table th.mat-header-cell:last-of-type {
+  padding-right: 0;
+}
+mat-card mat-card-actions {
+  margin: 0 25% 20px 25%;
+  padding-left: 20%;
+}
+mat-card mat-card-actions button {
+  width: 150px;
+}
+mat-card div#syneID {
+  margin: 0 25% 20px 25%;
+  padding-left: 10%;
+  width: 250px;
+}
+
+/*# sourceMappingURL=panel-entry.component.css.map */
