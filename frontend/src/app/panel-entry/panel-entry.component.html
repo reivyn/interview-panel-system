@@ -1,0 +1,158 @@
+<mat-card>
+  <mat-card-title>
+    Panel Registration
+  </mat-card-title>
+  <br>
+  <form class="form-column" [formGroup]="regForm" (submit)="addPanelEntry()">
+    <mat-card-content>
+      <div class="form-row" id="syneID">
+        <button mat-icon-button type="button"><mat-icon>perm_identity</mat-icon></button>
+        <mat-form-field>
+          <input matInput placeholder="Synechron ID" formControlName="synechronId"  required>
+          <mat-error *ngIf="fgc.synechronId.invalid">You must enter a value</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name" required>
+          <mat-error *ngIf="fgc.name.invalid">You must enter a value</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Surname" formControlName="surname" required>
+          <mat-error *ngIf="fgc.surname.invalid">You must enter a value</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field>
+          <input matInput placeholder="Email Synechron" formControlName="emailSyne" required>
+          <mat-error *ngIf="fgc.emailSyne.invalid">You must enter a value</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field>
+          <input matInput placeholder="Email Wells Fargo" formControlName="emailWF" required>
+          <mat-error *ngIf="fgc.emailWF.invalid">You must enter a value</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field>
+          <input matInput placeholder="Mobile Phone" formControlName="mobile" required>
+          <mat-error *ngIf="fgc.mobile.invalid">You must enter a value</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Extension" formControlName="extension">
+          <mat-error *ngIf="fgc.extension.invalid">You must enter a value</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field>
+          <mat-label>Skills</mat-label>
+          <mat-select formControlName="skills" (click)="showSelect()" multiple required>
+            <mat-select-trigger>
+              {{fgc.skills.value ? fgc.skills.value[1] ? fgc.skills.value[0] + ', ' + fgc.skills.value[1] : fgc.skills.value[0] : ''}}
+              <span *ngIf="fgc.skills.value?.length > 2" class="example-additional-selection">
+                  (+{{fgc.skills.value.length - 2}} {{fgc.skills.value?.length === 2 ? 'other' : 'others'}})
+                </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let skill of skillsList" [value]="skill">{{skill}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="fgc.skills.invalid">You must enter a value</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Designation" formControlName="designation" required>
+          <mat-error *ngIf="fgc.designation.invalid">You must enter a value</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-row" *ngIf="dataSource.data.length !== 3">
+        <button type="button" disabled mat-icon-button>
+          <mat-icon>calendar_today</mat-icon>
+        </button>
+        <mat-form-field color="accent">
+          <mat-label>Start Date</mat-label>
+          <input matInput [matDatepicker]="pickerStartDate" placeholder="MM/DD/YYYY" formControlName="startDate">
+          <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
+          <mat-datepicker #pickerStartDate></mat-datepicker>
+          <mat-error *ngIf="false">Input Error</mat-error>
+        </mat-form-field>
+        <mat-form-field color="accent">
+          <mat-label>End Date</mat-label>
+          <input matInput [matDatepicker]="pickerEndDate" placeholder="MM/DD/YYYY" formControlName="endDate">
+          <mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle>
+          <mat-datepicker #pickerEndDate></mat-datepicker>
+          <mat-error *ngIf="false">Input Error</mat-error>
+        </mat-form-field>
+        <mat-divider [vertical]="true"></mat-divider>
+        <button type="button" disabled mat-icon-button>
+          <mat-icon>access_time</mat-icon>
+        </button>
+        <mat-form-field>
+          <mat-label>Start Time</mat-label>
+          <input matInput [ngxTimepicker]="clockStartTime" placeholder="00:00 AM" formControlName="startTime" readonly>
+          <ngx-material-timepicker #clockStartTime></ngx-material-timepicker>
+          <mat-error *ngIf="false">Input Error</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>End Time</mat-label>
+          <input matInput [ngxTimepicker]="clockEndTime" placeholder="00:00 AM" formControlName="endTime" readonly>
+          <ngx-material-timepicker #clockEndTime></ngx-material-timepicker>
+        </mat-form-field>
+        <button
+          [disabled]="dataSource.data.length > 2 || (fgc.startDate.value === ''|| fgc.endDate.value === ''|| fgc.startTime.value === ''|| fgc.endTime.value === '')  "
+          type="button" mat-icon-button color="primary" (click)="addSlot()">
+          <mat-icon>add_circle</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="dataSource.data.length !== 0" class="form-row">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <!-- Start Date Column -->
+          <ng-container matColumnDef="startDate">
+            <th mat-header-cell *matHeaderCellDef> Start Date</th>
+            <td mat-cell *matCellDef="let element"> {{element.startDate | date:'MM/dd/yyyy'}} </td>
+          </ng-container>
+
+          <!-- End Date Column -->
+          <ng-container matColumnDef="endDate">
+            <th mat-header-cell *matHeaderCellDef> End Date</th>
+            <td mat-cell *matCellDef="let element"> {{element.endDate | date:'MM/dd/yyyy'}} </td>
+          </ng-container>
+
+          <!-- Start Time Column -->
+          <ng-container matColumnDef="startTime">
+            <th mat-header-cell *matHeaderCellDef> Start Time</th>
+            <td mat-cell *matCellDef="let element"> {{element.startTime}} </td>
+          </ng-container>
+
+          <!-- End Time Column -->
+          <ng-container matColumnDef="endTime">
+            <th mat-header-cell *matHeaderCellDef> End Time</th>
+            <td mat-cell *matCellDef="let element"> {{element.endTime}} </td>
+          </ng-container>
+
+          <!-- Remove Item Column -->
+          <ng-container matColumnDef="removeSlot">
+            <th mat-header-cell *matHeaderCellDef> Remove Slot</th>
+            <td mat-cell *matCellDef="let element;  let i = index;">
+              <button type="button" mat-icon-button color="warn" (click)="removeSlot(i)" *ngIf="!fgc.slots.disabled">
+                <mat-icon>remove_circle</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <!--          <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>-->
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button *ngIf="!fgc.synechronId.disabled" [disabled]="regForm.invalid" type="submit">Register</button>
+      <button mat-raised-button *ngIf="fgc.slots.disabled" [disabled]="regForm.invalid" type="button" (click)="editPanelForm()">Edit</button>
+      <button mat-raised-button *ngIf="fgc.synechronId.disabled && fgc.slots.enabled" [disabled]="regForm.invalid || dataSource.data.length === 0" type="button" (click)="savePanelForm()">Save</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

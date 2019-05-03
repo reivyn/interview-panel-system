@@ -1,0 +1,64 @@
+
+.loginContainer {
+  mat-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0 -50% 0 0;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    padding-bottom: 1px;
+
+
+    mat-card-title {
+      padding-top: 25px;
+      text-align: center
+    }
+
+    mat-card-content {
+      //padding: 15px 25% 0 25%;
+      margin: 5% 15% 5% 15%;
+
+      mat-form-field {
+        width: 100%;
+      }
+
+    }
+
+    mat-card-actions {
+      margin: 0 25% 20px 25%;
+      padding-left: 15%;
+    }
+
+    mat-card-footer {
+      width: 100%;
+      margin: auto;
+      font-size: smaller;
+
+      p#forgotPassword {
+        float: left;
+      }
+
+      p#signUpUser {
+        float: right;
+      }
+    }
+  }
+}
+
+//
+//.alert {
+//  position: relative;
+//  padding: .75rem 1.25rem;
+//  margin-bottom: 1rem;
+//  border: 1px solid transparent;
+//  border-radius: .25rem
+//}
+//
+//.alert-danger {
+//  color: #721c24;
+//  background-color: #f8d7da;
+//  border-color: #f5c6cb
+//}
+
+

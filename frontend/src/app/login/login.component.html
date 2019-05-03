@@ -1,0 +1,34 @@
+<section class="loginContainer">
+  <mat-card>
+    <mat-card-title>
+      {{labelTitle || 'Login' }}
+    </mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="frGroup">
+        <mat-form-field>
+          <input id="userName" matInput placeholder="{{labelUser || 'Username' }}" formControlName="username"
+                 (click)="desactivateError()" autocomplete="username">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input id="userPassword" matInput placeholder="{{labelPassword || 'Password'}}" [type]="hide ? 'password' : 'text'"
+                 formControlName="password" autocomplete="current-password">
+          <mat-icon matSuffix (click)="hide = !hide" >{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+        <mat-error *ngIf="loginError">User/Password Invalid</mat-error>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="sendLogin(fgc)" routerLink="/panelEntry/" [disabled]="frGroup.invalid">SIGN IN</button>
+    </mat-card-actions>
+    <mat-card-footer>
+      <p id="forgotPassword"><a (click)="openRecoverPassword()">Forgot your password?</a></p>
+      <p id="signUpUser">Don't have account? <a (click)="openUserSignUp()">Sign Up</a></p>
+
+<!--      <p id="forgotPassword"><a href="#" routerLink="test" [queryParams]="{dialog: true}">Forgot your password?</a></p>-->
+<!--      <p id="signUpUser">Don't have account? <a href="#" routerLink="register" [queryParams]="{register: true}">Sign Up</a></p>-->
+
+    </mat-card-footer>
+  </mat-card>
+</section>
+

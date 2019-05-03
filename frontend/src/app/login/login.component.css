@@ -1,0 +1,36 @@
+.loginContainer mat-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0 -50% 0 0;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  padding-bottom: 1px;
+}
+.loginContainer mat-card mat-card-title {
+  padding-top: 25px;
+  text-align: center;
+}
+.loginContainer mat-card mat-card-content {
+  margin: 5% 15% 5% 15%;
+}
+.loginContainer mat-card mat-card-content mat-form-field {
+  width: 100%;
+}
+.loginContainer mat-card mat-card-actions {
+  margin: 0 25% 20px 25%;
+  padding-left: 15%;
+}
+.loginContainer mat-card mat-card-footer {
+  width: 100%;
+  margin: auto;
+  font-size: smaller;
+}
+.loginContainer mat-card mat-card-footer p#forgotPassword {
+  float: left;
+}
+.loginContainer mat-card mat-card-footer p#signUpUser {
+  float: right;
+}
+
+/*# sourceMappingURL=login.component.css.map */
